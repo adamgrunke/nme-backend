@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const cameraSchema = new mongoose.Schema({
     brand: String,
-    type: String,
+    model: String,
+    quality: String,
     format: String,
     megaPixels: Number,
     lenses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Lens'}]
