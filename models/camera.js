@@ -7,7 +7,6 @@ const cameraSchema = new mongoose.Schema({
     format: String,
     megaPixels: Number,
     lenses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Lens'}]
-    
 })
 
 const Camera = mongoose.model('Camera', cameraSchema);

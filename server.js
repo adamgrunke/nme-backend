@@ -1,6 +1,16 @@
+const express = require('express');
 const mongoose = require('mongoose');
 const Camera = require('./models/camera')
 const Lens = require('./models/lens')
+
+const app = express();
+
+
+app.use(express.urlencoded({extended: false}));
+
+
+mongoose.connect('mongodb://localhost/nme-backend');
+
 
 // Parent CRUD ROUTES
 // GET ALL - parent
@@ -27,12 +37,26 @@ app.post('/camera', (req, res) => {
     quality: "professional",
     format: "micro43",
     megaPixels: 20,
-    lenses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Lens'}]
+    lenses: []
+    // lenses: [{brand: "Lumix", focalLength: 15, type: "standard"}]
     }, function(err, camera) {
         if (err) res.json(err)
         res.json(camera)
     })
 })
+// app.post('/camera', (req, res) => {
+//     Camera.create({
+//     brand: "Lumix",
+//     model: "G9",
+//     quality: "professional",
+//     format: "micro43",
+//     megaPixels: 20,
+//     lenses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Lens'}]
+//     }, function(err, camera) {
+//         if (err) res.json(err)
+//         res.json(camera)
+//     })
+// })
 
 // Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options, callback)
 // UPDATE - parent
@@ -91,6 +115,8 @@ app.post('/lens/:id', (req, res) => {
     })
     })
 })
+ 
 
-
-
+app.listen(3001, function() {
+    console.log('listening to port 3001!         ');
+});
